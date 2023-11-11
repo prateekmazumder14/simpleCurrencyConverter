@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500&display=swap');
+
+*, *::after, *::before {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0;
+    background: rgb(10, 0, 74);
+    background: linear-gradient(150deg, rgba(10, 0, 74, 1) 0%, rgba(27, 146, 169, 1) 60%);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Vertical centering */
+}
+
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative; /* Needed for absolute positioning inside it */
+}
+
+#converter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering the element */
+    text-align: center;
+}
+
+.converter-inner {
+    background: #FAFAFA;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px 4px rgba(255, 255, 255, 1); /* Improved Box shadow for contrast */
+}
+
+.title-wrapper h1 {
+    font-size: 35px;
+    margin-bottom: 10px; /* Added space between title and subtitle */
+}
+
+.title-wrapper p {
+    font-size: 18px; /* Slightly reduced font size for better balance */
+}
+
+.currency-setup {
+    padding: 15px;
+}
+
+.field-wrap {
+    display: flex;
+    flex-direction: column; /* Adjusted to a column layout for better responsiveness */
+    margin-bottom: 15px; /* Added space between fields */
+}
+
+.field-wrap label {
+    font-size: 16px; /* Improved label font size */
+}
+
+.field-wrap select, input {
+    padding: 7px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.field-wrap .apply-button-wrap {
+    margin-top: 15px; /* Added space between fields and the Apply button */
+}
+
+.btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    background: linear-gradient(150deg, rgba(10, 0, 74, 1) 0%, rgba(27, 146, 169, 1) 60%); /* Background gradient */
+    color: #FFF; /* Text color for the Apply button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.result-wrap {
+    margin-top: 20px;
+    border: 10px solid transparent;
+    border-image: linear-gradient(150deg, rgba(10, 0, 74, 1) 0%, rgba(27, 146, 169, 1) 60%);
+    border-image-slice: 2;
+}
+
+.result-wrap p {
+    font-size: 20px; /* Adjusted result font size */
+    margin: 0; /* Removed default margin for cleaner look */
+}
+.hidden{
+    display: none;
+}
+
+/* Media query for tablets */
+@media only screen and (max-width: 768px) {
+    .converter-inner {
+        padding: 20px; /* Adjusted padding for smaller screens */
+        border-radius: 20px; /* Smaller border-radius */
+    }
+
+    .title-wrapper h1 {
+        font-size: 30px; /* Adjusted title font size for smaller screens */
+    }
+
+    .title-wrapper p {
+        font-size: 16px; /* Adjusted subtitle font size for smaller screens */
+    }
+
+    .field-wrap {
+        padding: 8px; /* Adjusted padding for fields */
+    }
+
+    label {
+        font-size: 14px; /* Adjusted label font size for fields */
+    }
+
+    select, input {
+        padding: 6px;
+        font-size: 12px; /* Adjusted input and select font size for fields */
+        margin-top: 3px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px; /* Adjusted button font size for smaller screens */
+    }
+
+    .result-wrap p {
+        font-size: 14px; /* Adjusted result font size for smaller screens */
+    }
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 480px) {
+    .converter-inner {
+        padding: 15px; /* Further adjusted padding for smaller screens */
+        border-radius: 15px; /* Smaller border-radius */
+    }
+
+    .title-wrapper h1 {
+        font-size: 25px; /* Adjusted title font size for smaller screens */
+    }
+
+    .title-wrapper p {
+        font-size: 14px; /* Adjusted subtitle font size for smaller screens */
+    }
+
+    .field-wrap {
+        padding: 6px; /* Further adjusted padding for fields */
+    }
+
+    label {
+        font-size: 12px; /* Adjusted label font size for fields */
+    }
+
+    select, input {
+        padding: 5px;
+        font-size: 10px; /* Further adjusted input and select font size for fields */
+        margin-top: 2px;
+    }
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 12px; /* Further adjusted button font size for smaller screens */
+    }
+
+    .result-wrap p {
+        font-size: 12px; /* Further adjusted result font size for smaller screens */
+    }
+}
