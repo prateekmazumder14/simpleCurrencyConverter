@@ -1,35 +1,36 @@
-document.addEventListener('DOMContentLoaded', (e) => {
-    document.querySelector('[data-apply]').addEventListener('click', (event) => {
-        //event.preventDefault();
-        let amount = document.querySelector('#Amount').value;
-        let base = document.querySelector('#Base').value;
-        let target = document.querySelector('#Target').value;
-        const API_KEY = "YOUR_API_KEY";
-        const apiUrl = `https://api.freecurrencyapi.com/v1/latest?apikey=${API_KEY}&base_currency=${base}&currencies=${target}`;
+// script.js
 
-        // Make the Fetch API call
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Network response was not ok: ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Process the data
+// In dev, we’ll run FastAPI at 8080. In prod, we’ll use Firebase rewrite (/api → Cloud Run).
+const API_BASE =
+  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? 'http://localhost:8080'
+    : '/api';
 
-                let targetAmount = amount * data.data[target];
+document.addEventListener('DOMContentLoaded', () => {
+  const applyBtn = document.querySelector('[data-apply]');
+  const resultWrap = document.querySelector('.result-wrap');
 
-                let text = `${amount} ${base} = ${targetAmount.toFixed(2)} ${target}`;
+  applyBtn.addEventListener('click', async () => {
+    const amount = Number(document.querySelector('#Amount').value || 1);
+    const base = document.querySelector('#Base').value;
+    const target = document.querySelector('#Target').value;
 
-                let result = document.querySelector('.result-wrap');
+    try {
+      const url = `${API_BASE}/convert?from=${encodeURIComponent(base)}&to=${encodeURIComponent(target)}&amount=${amount}`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(`API error ${res.status}: ${txt}`);
+      }
+      const data = await res.json(); // { rate, converted }
 
-                result.querySelector('p').textContent = text;
-
-                result.classList.remove('hidden');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    });
+      const text = `${amount} ${base} = ${data.converted.toFixed(2)} ${target}`;
+      resultWrap.querySelector('p').textContent = text;
+      resultWrap.classList.remove('hidden');
+    } catch (err) {
+      console.error(err);
+      resultWrap.querySelector('p').textContent = 'Conversion failed. Try again.';
+      resultWrap.classList.remove('hidden');
+    }
+  });
 });

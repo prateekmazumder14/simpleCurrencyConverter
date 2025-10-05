@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Node/Firebase
+node_modules/
+.firebase/
+.firebase-tools.json
+
+# OS/editor
+.DS_Store
+*.log
